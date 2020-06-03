@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-md-6 float-left">
+    <h2 class="mt-2">{{ "APP_TITLE" | translate }}</h2>
+  </div>
+  <div class="col-md-6 float-right text-right mt-3">
+    <!-- I18n Start -->
+    <div class="form-group">
+      <button
+        class="btn mr-2"
+        [ngClass]="
+          selectedLanguage === 'en' ? 'btn-success' : 'btn-outline-success'
+        "
+        (click)="useLanguage('en')"
+      >
+        English
+      </button>
+      <button
+        class="btn"
+        [ngClass]="
+          selectedLanguage === 'hindi' ? 'btn-success' : 'btn-outline-success'
+        "
+        (click)="useLanguage('hindi')"
+      >
+        हिन्दी
+      </button>
+    </div>
+    <!-- I18n end -->
+  </div>
+</div>

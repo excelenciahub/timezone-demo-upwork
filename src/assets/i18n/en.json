@@ -1,0 +1,21 @@
+{
+    "APP_TITLE": "Angular timezone example",
+    "MEETING" : {
+        "NEW_RECORD": "New Record",
+        "NAME": "Name",
+        "NAME_IS_REQUIRED": "Name is required",
+        "DATE": "Date",
+        "PLEASE_SELECT_DATE": "Please select date",
+        "PLEASE_SELECT_VALID_DATE": "Please select valid date",
+        "START_TIME": "Start Time",
+        "PLEASE_SELECT_START_HOUR_AND_MINUTES": "Please select start hour and minutes",
+        "END_TIME": "End Time",
+        "PLEASE_SELECT_END_HOUR_AND_MINUTES": "Please select end hour and minutes",
+        "PLEASE_SELECT_START_TIME_BEFORE_AND_TIME": "Please select start time before end time",
+        "THIS_SLOT_IS_ALREADY_BOOKED": "This slot is already booked please select other time",
+        "SUBMIT": "Submit",
+        "ID": "ID",
+        "MEETING_CREATED_SUCCESSFULLY": "Meeting added successfully",
+        "NEW_MEETING": "New meeting"
+    }
+ }

@@ -1,0 +1,179 @@
+<div class="container-fluid meeting-container">
+  <app-header></app-header>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <select class="form-control" [(ngModel)]="selectedTimeZone">
+          <option *ngFor="let timeZone of timeZones">{{ timeZone }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div *ngIf="isSuccess" class="alert alert-success" role="alert">
+        {{ "MEETING.MEETING_CREATED_SUCCESSFULLY" | translate }}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <!-- Form start -->
+      <form [formGroup]="meetingForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="card">
+          <div class="card-header">
+            <div class="">{{ "MEETING.NEW_MEETING" | translate }}</div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <!-- Name field start -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="name">{{ "MEETING.NAME" | translate }}</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    formControlName="name"
+                    placeholder="{{ 'MEETING.NAME' | translate }}"
+                  />
+                  <div
+                    *ngIf="isFormSubmitted && f.name.errors"
+                    class="mb-2 text-danger"
+                  >
+                    <div *ngIf="f.name.errors.required">
+                      {{ "MEETING.NAME_IS_REQUIRED" | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Name field end -->
+
+              <!-- Date field start -->
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="name">{{ "MEETING.DATE" | translate }}</label>
+                  <input
+                    class="form-control"
+                    placeholder="YYYY-MM-DD"
+                    name="date"
+                    [minDate]="minDate"
+                    formControlName="date"
+                    ngbDatepicker
+                    #d="ngbDatepicker"
+                    (click)="d.toggle()"
+                  />
+                  <div
+                    *ngIf="isFormSubmitted && f.date.invalid"
+                    class="mb-2 text-danger"
+                  >
+                    <div *ngIf="f.date.errors.required">
+                      {{ "MEETING.PLEASE_SELECT_DATE" | translate }}
+                    </div>
+                    <div *ngIf="f.date.errors.ngbDate?.invalid">
+                      {{ "MEETING.PLEASE_SELECT_VALID_DATE" | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Date field end -->
+            </div>
+
+            <div class="row">
+              <!-- Start Time field start -->
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="name">{{ "MEETING.START_TIME" | translate }}</label>
+                  <ngb-timepicker
+                    formControlName="startTime"
+                    [meridian]="meridian"
+                    (ngModelChange)="startDateTimeAndEndDateTimeChange()"
+                    (input)="startDateTimeAndEndDateTimeChange()"
+                  ></ngb-timepicker>
+                  <div
+                    *ngIf="isFormSubmitted && f.startTime.errors"
+                    class="mb-2 text-danger"
+                  >
+                    <div *ngIf="f.startTime.errors.required">
+                      {{ "MEETING.PLEASE_SELECT_START_HOUR_AND_MINUTES" | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Start Time field end -->
+
+              <!-- End Time field start -->
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="name">{{ "MEETING.END_TIME" | translate }}</label>
+                  <ngb-timepicker
+                    formControlName="endTime"
+                    [meridian]="meridian"
+                    (ngModelChange)="startDateTimeAndEndDateTimeChange()"
+                    (input)="startDateTimeAndEndDateTimeChange()"
+                  ></ngb-timepicker>
+                  <div
+                    *ngIf="isFormSubmitted && f.endTime.errors"
+                    class="mb-2 text-danger"
+                  >
+                    <div *ngIf="f.endTime.errors.required">
+                      {{ "MEETING.PLEASE_SELECT_END_HOUR_AND_MINUTES" | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End Time field end -->
+
+              <div class="col-md-12">
+                <div
+                  *ngIf="isFormSubmitted && f.date.errors"
+                  class="mb-2 text-danger"
+                >
+                  <div *ngIf="f.date.errors.invalid">
+                    {{ "MEETING.PLEASE_SELECT_START_TIME_BEFORE_AND_TIME" | translate }}
+                  </div>
+                </div>
+                <div
+                  *ngIf="isFormSubmitted && f.date.errors"
+                  class="mb-2 text-danger"
+                >
+                  <div *ngIf="f.date.errors.invalidSlot">
+                    {{ "MEETING.THIS_SLOT_IS_ALREADY_BOOKED" | translate }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button type="submit" class="btn btn-primary mr-2">
+              <i class="fa fa-dot-circle-o"></i> {{ "MEETING.SUBMIT" | translate }}
+            </button>
+          </div>
+        </div>
+      </form>
+      <!-- Form end -->
+    </div>
+    <div class="col-md-6">
+      <!-- Meeting table start -->
+      <table class="table table-border table-hover table-striped">
+        <thead>
+          <tr>
+            <th>{{ "MEETING.ID" | translate }}</th>
+            <th>{{ "MEETING.NAME" | translate }}</th>
+            <th>{{ "MEETING.START_TIME" | translate }}</th>
+            <th>{{ "MEETING.END_TIME" | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let meeting of meetingList; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ meeting.name }}</td>
+            <td>{{ meeting.startDateTime | customDate: selectedTimeZone }}</td>
+            <td>{{ meeting.endDateTime | customDate: selectedTimeZone }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- Meeting table end -->
+    </div>
+  </div>
+</div>

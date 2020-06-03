@@ -1,0 +1,21 @@
+ {
+    "APP_TITLE": "कोणीय समयक्षेत्र उदाहरण",
+    "MEETING" : {
+        "NEW_RECORD": "नया रिकॉर्ड",
+        "NAME": "नाम",
+        "NAME_IS_REQUIRED": "नाम आवश्यक है",
+        "DATE": "तारीख",
+        "PLEASE_SELECT_DATE": "कृपया तारीख का चयन करें",
+        "PLEASE_SELECT_VALID_DATE": "कृपया मान्य तिथि चुनें",
+        "START_TIME": "समय शुरू",
+        "PLEASE_SELECT_START_HOUR_AND_MINUTES": "कृपया प्रारंभ घंटे और मिनट चुनें",
+        "END_TIME": "अंतिम समय",
+        "PLEASE_SELECT_END_HOUR_AND_MINUTES": "कृपया अंतिम घंटे और मिनट चुनें",
+        "PLEASE_SELECT_START_TIME_BEFORE_AND_TIME": "कृपया अंतिम समय से पहले प्रारंभ समय का चयन करें",
+        "THIS_SLOT_IS_ALREADY_BOOKED": "यह स्लॉट पहले से बुक है कृपया अन्य समय का चयन करें",
+        "SUBMIT": "प्रस्तुत",
+        "ID": "आईडी",
+        "MEETING_CREATED_SUCCESSFULLY": "मीटिंग सफलतापूर्वक जोड़ा गया",
+        "NEW_MEETING": "नई बैठक"
+    }
+ }
